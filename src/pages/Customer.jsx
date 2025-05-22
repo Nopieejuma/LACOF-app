@@ -1,5 +1,5 @@
 import { useState } from "react";
-import adminData from "./admin.json";
+import adminData from "./Admin.json";
 
 export default function AdminListSearchFilter() {
   const [dataForm, setDataForm] = useState({

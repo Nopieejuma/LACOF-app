@@ -1,0 +1,15 @@
+{
+  "daily": [
+    { "label": "Senin", "total": 1200000 },
+    { "label": "Selasa", "total": 980000 },
+    { "label": "Rabu", "total": 1300000 }
+  ],
+  "weekly": [
+    { "label": "Minggu 1", "total": 7500000 },
+    { "label": "Minggu 2", "total": 8900000 }
+  ],
+  "monthly": [
+    { "label": "Januari", "total": 32000000 },
+    { "label": "Februari", "total": 29500000 }
+  ]
+}

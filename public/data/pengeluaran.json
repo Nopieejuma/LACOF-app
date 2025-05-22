@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "date": "2025-05-01",
+    "category": "Electricity",
+    "description": "Monthly electricity bill",
+    "amount": 1500000
+  },
+  {
+    "id": 2,
+    "date": "2025-05-03",
+    "category": "Salary",
+    "description": "Barista May salary",
+    "amount": 5000000
+  },
+  {
+    "id": 3,
+    "date": "2025-05-05",
+    "category": "Supplies",
+    "description": "Coffee beans purchase",
+    "amount": 2000000
+  },
+  {
+    "id": 4,
+    "date": "2025-05-07",
+    "category": "Maintenance",
+    "description": "Coffee machine repair",
+    "amount": 750000
+  },
+  {
+    "id": 5,
+    "date": "2025-05-10",
+    "category": "Rent",
+    "description": "Monthly shop rent",
+    "amount": 8000000
+  },
+  {
+    "id": 6,
+    "date": "2025-05-12",
+    "category": "Supplies",
+    "description": "Milk and sugar",
+    "amount": 300000
+  },
+  {
+    "id": 7,
+    "date": "2025-05-15",
+    "category": "Cleaning",
+    "description": "Cleaning service",
+    "amount": 400000
+  },
+  {
+    "id": 8,
+    "date": "2025-05-18",
+    "category": "Marketing",
+    "description": "Social media ads",
+    "amount": 1200000
+  },
+  {
+    "id": 9,
+    "date": "2025-05-20",
+    "category": "Office Supplies",
+    "description": "Stationery purchase",
+    "amount": 150000
+  },
+  {
+    "id": 10,
+    "date": "2025-05-22",
+    "category": "Miscellaneous",
+    "description": "Unexpected expenses",
+    "amount": 500000
+  }
+]

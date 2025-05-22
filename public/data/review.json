@@ -1,0 +1,20 @@
+[
+  {
+    "customer": "Dewi Lestari",
+    "rating": 5,
+    "comment": "Kopinya enak banget dan tempatnya nyaman!",
+    "date": "2025-05-10"
+  },
+  {
+    "customer": "Andi Saputra",
+    "rating": 4,
+    "comment": "Pelayanan oke, hanya waiting time agak lama.",
+    "date": "2025-05-11"
+  },
+  {
+    "customer": "Sari Wulandari",
+    "rating": 5,
+    "comment": "Suka banget sama Red Velvet cake-nya!",
+    "date": "2025-05-12"
+  }
+]

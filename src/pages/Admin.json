@@ -1,0 +1,38 @@
+[
+    {
+      "id": 1,
+      "name": "Admin Rina",
+      "phone": "+6281234567890",
+      "operationalHours": "08:00 - 17:00",
+      "tags": ["responsif", "ramah", "pagi"]
+    },
+    {
+      "id": 2,
+      "name": "Admin Budi",
+      "phone": "+6282233344555",
+      "operationalHours": "09:00 - 18:00",
+      "tags": ["cepat", "pengalaman", "siang"]
+    },
+    {
+      "id": 3,
+      "name": "Admin Sari",
+      "phone": "+6283123456789",
+      "operationalHours": "07:30 - 16:30",
+      "tags": ["disiplin", "senyum", "pagi"]
+    },
+    {
+      "id": 4,
+      "name": "Admin Dika",
+      "phone": "+6285278901234",
+      "operationalHours": "10:00 - 19:00",
+      "tags": ["aktif", "respon cepat", "sore"]
+    },
+    {
+      "id": 5,
+      "name": "Admin Laila",
+      "phone": "+6281288887777",
+      "operationalHours": "08:30 - 17:30",
+      "tags": ["ramah", "komunikatif", "pagi"]
+    }
+  ]
+  

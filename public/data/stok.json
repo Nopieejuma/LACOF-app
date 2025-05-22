@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Espresso",
+    "category": "Minuman",
+    "price": 15000,
+    "stock": 50,
+    "unit": "cup",
+    "status": "available"
+  },
+  {
+    "id": 2,
+    "name": "Cappuccino",
+    "category": "Minuman",
+    "price": 20000,
+    "stock": 30,
+    "unit": "cup",
+    "status": "available"
+  },
+  {
+    "id": 3,
+    "name": "Red Velvet Cake",
+    "category": "Makanan",
+    "price": 35000,
+    "stock": 15,
+    "unit": "slice",
+    "status": "available"
+  },
+  {
+    "id": 4,
+    "name": "Matcha Latte",
+    "category": "Minuman",
+    "price": 25000,
+    "stock": 25,
+    "unit": "cup",
+    "status": "available"
+  },
+  {
+    "id": 5,
+    "name": "Blueberry Muffin",
+    "category": "Makanan",
+    "price": 22000,
+    "stock": 10,
+    "unit": "pcs",
+    "status": "low_stock"
+  },
+  {
+    "id": 6,
+    "name": "Americano",
+    "category": "Minuman",
+    "price": 18000,
+    "stock": 40,
+    "unit": "cup",
+    "status": "available"
+  },
+  {
+    "id": 7,
+    "name": "Chocolate Cake",
+    "category": "Makanan",
+    "price": 30000,
+    "stock": 8,
+    "unit": "slice",
+    "status": "low_stock"
+  },
+  {
+    "id": 8,
+    "name": "Iced Lemon Tea",
+    "category": "Minuman",
+    "price": 15000,
+    "stock": 20,
+    "unit": "cup",
+    "status": "available"
+  },
+  {
+    "id": 9,
+    "name": "Croissant",
+    "category": "Makanan",
+    "price": 18000,
+    "stock": 12,
+    "unit": "pcs",
+    "status": "available"
+  },
+  {
+    "id": 10,
+    "name": "Macaron Assorted",
+    "category": "Makanan",
+    "price": 40000,
+    "stock": 5,
+    "unit": "box",
+    "status": "low_stock"
+  }
+]

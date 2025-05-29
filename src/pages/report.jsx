@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Report() {
   const [reportData, setReportData] = useState([]);
@@ -6,11 +7,11 @@ export default function Report() {
 
   useEffect(() => {
     fetch("/data/report.json")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setReportData(data[filter] || []);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Gagal ambil data:", err);
         setReportData([]);
       });
@@ -23,30 +24,17 @@ export default function Report() {
       </h2>
 
       <div className="flex gap-2">
-        <button
-          onClick={() => setFilter("daily")}
-          className={`px-4 py-2 rounded ${
-            filter === "daily" ? "bg-blue-600 text-white" : "bg-gray-200"
-          }`}
-        >
-          Harian
-        </button>
-        <button
-          onClick={() => setFilter("weekly")}
-          className={`px-4 py-2 rounded ${
-            filter === "weekly" ? "bg-blue-600 text-white" : "bg-gray-200"
-          }`}
-        >
-          Mingguan
-        </button>
-        <button
-          onClick={() => setFilter("monthly")}
-          className={`px-4 py-2 rounded ${
-            filter === "monthly" ? "bg-blue-600 text-white" : "bg-gray-200"
-          }`}
-        >
-          Bulanan
-        </button>
+        {["daily", "weekly", "monthly"].map((f) => (
+          <button
+            key={f}
+            onClick={() => setFilter(f)}
+            className={`px-4 py-2 rounded ${
+              filter === f ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            {f === "daily" ? "Harian" : f === "weekly" ? "Mingguan" : "Bulanan"}
+          </button>
+        ))}
       </div>
 
       <div className="overflow-x-auto">
@@ -66,8 +54,12 @@ export default function Report() {
               </tr>
             ) : (
               reportData.map((item, index) => (
-                <tr key={index} className="border-t">
-                  <td className="p-3 bg-amber-100">{item.label}</td>
+                <tr key={index} className="border-t hover:bg-gray-100 cursor-pointer">
+                  <td className="p-3 bg-amber-100">
+                    <Link to={`/report/${filter}/${index}`} className="text-blue-600 hover:underline">
+                      {item.label}
+                    </Link>
+                  </td>
                   <td className="p-3 bg-emerald-200">{item.total.toLocaleString("id-ID")}</td>
                 </tr>
               ))

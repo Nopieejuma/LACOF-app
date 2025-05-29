@@ -13,7 +13,7 @@ export default function Dashboard() {
   return (
     <div id="dashboard-container">
       <PageHeader 
-        title="Welcome back,  Novia"
+        title="User Management,  Novia-Admin"
         breadcrumb={["Admin", "Dashboard"]}
       >
         <button className="bg-amber-600 text-white px-3 py-3 rounded flex items-center">Export data <AiOutlineArrowUp className="ml-2" /></button>

@@ -72,6 +72,14 @@ export default function PageHeader() {
                         <NavLink id="menu-10" to="/Pengeluaran"
                         className={menuClass}> <FcMoneyTransfer className="mr-2 text-xl" />Rekap Pengeluaran</NavLink>
                       </li>
+                       <li>
+                        <NavLink id="menu-11" to="/Advice"
+                        className={menuClass}> <FcMoneyTransfer className="mr-2 text-xl" />Advice</NavLink>
+                      </li>
+                       <li>
+                        <NavLink id="menu-12" to="/Quote"
+                        className={menuClass}> <FcMoneyTransfer className="mr-2 text-xl" />Quotes</NavLink>
+                      </li>
                 </ul>
             </div>
             );

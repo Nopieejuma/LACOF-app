@@ -1,20 +1,16 @@
 [
   {
-    "customer": "Dewi Lestari",
+    "id": 1,
+    "customer": "Andi",
     "rating": 5,
-    "comment": "Kopinya enak banget dan tempatnya nyaman!",
-    "date": "2025-05-10"
+    "comment": "Kopi enak dan pelayanan ramah.",
+    "date": "2025-05-28"
   },
   {
-    "customer": "Andi Saputra",
+    "id": 2,
+    "customer": "Budi",
     "rating": 4,
-    "comment": "Pelayanan oke, hanya waiting time agak lama.",
-    "date": "2025-05-11"
-  },
-  {
-    "customer": "Sari Wulandari",
-    "rating": 5,
-    "comment": "Suka banget sama Red Velvet cake-nya!",
-    "date": "2025-05-12"
+    "comment": "Tempat nyaman, cocok buat kerja.",
+    "date": "2025-05-27"
   }
 ]

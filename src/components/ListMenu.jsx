@@ -1,3 +1,7 @@
+import { FcFaq } from "react-icons/fc"; 
+import { BsFillChatLeftDotsFill } from "react-icons/bs"; 
+import { AiOutlineTeam } from "react-icons/ai"; 
+import { AiOutlineSound } from "react-icons/ai"; 
 import { FcMoneyTransfer } from "react-icons/fc"; 
 import { GiKnapsack } from "react-icons/gi"; 
 import { MdReviews } from "react-icons/md"; 
@@ -79,6 +83,22 @@ export default function PageHeader() {
                        <li>
                         <NavLink id="menu-12" to="/Quote"
                         className={menuClass}> <FcMoneyTransfer className="mr-2 text-xl" />Quotes</NavLink>
+                      </li>
+                        <li>
+                        <NavLink id="menu-13" to="/Loker"
+                        className={menuClass}> <AiOutlineSound  className="mr-2 text-xl" />Loker</NavLink>
+                      </li>
+                       <li>
+                        <NavLink id="menu-14" to="/Tim"
+                        className={menuClass}>  <AiOutlineTeam className="mr-2 text-xl" />Tim</NavLink>
+                      </li>
+                       <li>
+                        <NavLink id="menu-15" to="/Testimoni"
+                        className={menuClass}>  <BsFillChatLeftDotsFill  className="mr-2 text-xl" />Testimoni</NavLink>
+                      </li>
+                      <li>
+                        <NavLink id="menu-16" to="/FAQ"
+                        className={menuClass}>  <FcFaq className="mr-2 text-xl" />FAQ</NavLink>
                       </li>
                 </ul>
             </div>

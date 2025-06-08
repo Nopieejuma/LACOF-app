@@ -35,6 +35,10 @@ import ReportDetail from "./pages/reportDetail";
 // import Review from "./pages/review";
 import Stok from "./pages/stok";
 import Pengeluaran from "./pages/pengeluaran";
+import Loker from "./pages/loker";
+import Tim from "./pages/tim";
+import Testimoni from "./pages/testimoni";
+import FAQ from "./pages/FAQ";
 
 export default function App() {
   return (
@@ -65,6 +69,10 @@ export default function App() {
           <Route path="/Quote/:id" element={<QuoteDetail />} />
           <Route path="/review" element={<Review />} />
         <Route path="/review/:id" element={<ReviewDetail />} />
+         <Route path="Loker" element={<Loker />} />
+          <Route path="Tim" element={<Tim />} />
+           <Route path="Testimoni" element={<Testimoni />} />
+            <Route path="FAQ" element={<FAQ />} />
         </Route>
 
         <Route element={<AuthLayout />}>

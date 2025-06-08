@@ -1,37 +1,35 @@
 import { useEffect, useState } from "react"
-import { stokAPI } from "../services/stokAPI"
+import { lokerAPI } from "../services/lokerAPI" // pastikan ada API service untuk loker
 import GenericTable from "../components/GenericTable"
 import AlertBox from "../components/AlertBox"
 import EmptyState from "../components/EmptyState"
 import LoadingSpinner from "../components/LoadingSpinner"
 
-export default function Stok() {
-  const [stok, setStok] = useState([])
+export default function Loker() {
+  const [loker, setLoker] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [editId, setEditId] = useState(null)
 
   const [dataForm, setDataForm] = useState({
-    namaBahan: "",
-    stok: "",
-    status: "",
-    unit: "",
+    posisi: "",
+    kriteria: "",
   })
 
   useEffect(() => {
-    loadStok()
+    loadLoker()
   }, [])
 
-  const loadStok = async () => {
+  const loadLoker = async () => {
     try {
       setLoading(true)
       setError("")
-      const data = await stokAPI.fetchStok()
-      setStok(data)
+      const data = await lokerAPI.fetchLoker()
+      setLoker(data)
     } catch (err) {
       console.error(err)
-      setError("Gagal memuat data stok")
+      setError("Gagal memuat data lowongan kerja")
     } finally {
       setLoading(false)
     }
@@ -48,54 +46,52 @@ export default function Stok() {
     setSuccess("")
     try {
       if (editId) {
-        await stokAPI.updateStok(editId, dataForm)
-        setSuccess("Stok berhasil diperbarui")
+        await lokerAPI.updateLoker(editId, dataForm)
+        setSuccess("Lowongan berhasil diperbarui")
       } else {
-        await stokAPI.create(dataForm)
-        setSuccess("Stok berhasil ditambahkan")
+        await lokerAPI.create(dataForm)
+        setSuccess("Lowongan berhasil ditambahkan")
       }
-      setDataForm({ namaBahan: "", stok: "", status: "", unit: "" })
+      setDataForm({ posisi: "", kriteria: "" })
       setEditId(null)
-      loadStok()
+      loadLoker()
     } catch (err) {
       console.error(err)
-      setError("Gagal menyimpan stok")
+      setError("Gagal menyimpan lowongan kerja")
     }
   }
 
   const handleEdit = (item) => {
     setEditId(item.id)
     setDataForm({
-      namaBahan: item.namaBahan,
-      stok: item.stok,
-      status: item.status,
-      unit: item.unit,
+      posisi: item.posisi,
+      kriteria: item.kriteria,
     })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleDelete = async (id) => {
-    if (!confirm("Yakin ingin menghapus stok ini?")) return
+    if (!confirm("Yakin ingin menghapus lowongan ini?")) return
     try {
-      await stokAPI.deleteStok(id)
-      setSuccess("Stok berhasil dihapus")
-      loadStok()
+      await lokerAPI.deleteLoker(id)
+      setSuccess("Lowongan berhasil dihapus")
+      loadLoker()
     } catch (err) {
       console.error(err)
-      setError("Gagal menghapus stok")
+      setError("Gagal menghapus lowongan")
     }
   }
 
-  const columns = ["#", "Nama Bahan", "Stok", "Status", "Unit", "Aksi"]
+  const columns = ["#", "Posisi", "Kriteria", "Aksi"]
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6">Manajemen Stok</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-6">Manajemen Lowongan Kerja</h2>
 
       {/* Form Tambah/Edit */}
       <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
         <h3 className="text-lg font-semibold mb-4">
-          {editId ? "Edit Stok" : "Tambah Stok Baru"}
+          {editId ? "Edit Lowongan" : "Tambah Lowongan Baru"}
         </h3>
 
         {success && <AlertBox type="success">{success}</AlertBox>}
@@ -104,41 +100,21 @@ export default function Stok() {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             type="text"
-            name="namaBahan"
-            value={dataForm.namaBahan}
-            placeholder="Nama Bahan"
+            name="posisi"
+            value={dataForm.posisi}
+            placeholder="Posisi"
             onChange={handleChange}
             className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
             required
           />
 
-          <input
-            type="number"
-            name="stok"
-            value={dataForm.stok}
-            placeholder="Jumlah Stok"
+          <textarea
+            name="kriteria"
+            value={dataForm.kriteria}
+            placeholder="Kriteria"
             onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
-            required
-          />
-
-          <input
-            type="text"
-            name="status"
-            value={dataForm.status}
-            placeholder="Status (Contoh: Aman / Habis)"
-            onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
-            required
-          />
-
-          <input
-            type="text"
-            name="unit"
-            value={dataForm.unit}
-            placeholder="Unit (Contoh: Kg / L)"
-            onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300 resize-y"
+            rows={4}
             required
           />
 
@@ -146,30 +122,28 @@ export default function Stok() {
             type="submit"
             className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition"
           >
-            {editId ? "Simpan Perubahan" : "Simpan Stok"}
+            {editId ? "Simpan Perubahan" : "Simpan Lowongan"}
           </button>
         </form>
       </div>
 
-      {/* Tabel Daftar Stok */}
+      {/* Tabel Daftar Lowongan */}
       <div className="bg-white rounded-2xl shadow-lg p-6">
-        <h3 className="text-lg font-semibold mb-4">Daftar Stok</h3>
+        <h3 className="text-lg font-semibold mb-4">Daftar Lowongan</h3>
 
         {loading ? (
-          <LoadingSpinner text="Memuat data stok..." />
-        ) : stok.length === 0 ? (
-          <EmptyState text="Belum ada data stok" />
+          <LoadingSpinner text="Memuat data lowongan..." />
+        ) : loker.length === 0 ? (
+          <EmptyState text="Belum ada data lowongan" />
         ) : (
           <GenericTable
             columns={columns}
-            data={stok}
+            data={loker}
             renderRow={(item, index) => (
               <>
                 <td className="px-6 py-3">{index + 1}</td>
-                <td className="px-6 py-3">{item.namaBahan}</td>
-                <td className="px-6 py-3">{item.stok}</td>
-                <td className="px-6 py-3">{item.status}</td>
-                <td className="px-6 py-3">{item.unit}</td>
+                <td className="px-6 py-3">{item.posisi}</td>
+                <td className="px-6 py-3">{item.kriteria}</td>
                 <td className="px-6 py-3 space-x-2">
                   <button
                     className="text-sm text-blue-600 hover:underline"

@@ -42,7 +42,7 @@ import Loker from "./pages/loker";
 import Tim from "./pages/tim";
 import Testimoni from "./pages/testimoni";
 import FAQ from "./pages/FAQ";
-import Artikel from "./pages/artikel";
+import Artikel from "./pages/Artikel";
 import Booking from "./pages/Booking";
 import User from "./pages/user";
 import Galeri from "./pages/Galeri";

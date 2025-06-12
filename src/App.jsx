@@ -4,7 +4,6 @@ const Product = React.lazy(() => import("./pages/Product"));
 
 // import Dashboard from "./pages/Dashboard";
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
-const artikel = React.lazy(() => import("./pages/artikel"));
 
 import { Route, Routes } from "react-router-dom";
 // import Customers from "./pages/Customer";

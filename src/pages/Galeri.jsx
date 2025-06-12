@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react"
-import { stokAPI } from "../services/stokAPI"
+import { galeriAPI } from "../services/galeriAPI"
 import GenericTable from "../components/GenericTable"
 import AlertBox from "../components/AlertBox"
 import EmptyState from "../components/EmptyState"
 import LoadingSpinner from "../components/LoadingSpinner"
 
-export default function Stok() {
-  const [stok, setStok] = useState([])
+export default function Galeri() {
+  const [galeri, setGaleri] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [editId, setEditId] = useState(null)
 
   const [dataForm, setDataForm] = useState({
-    namaBahan: "",
-    stok: "",
-    status: "",
-    unit: "",
+    gambar: "",
   })
 
   useEffect(() => {
-    loadStok()
+    loadGaleri()
   }, [])
 
-  const loadStok = async () => {
+  const loadGaleri = async () => {
     try {
       setLoading(true)
       setError("")
-      const data = await stokAPI.fetchStok()
-      setStok(data)
+      const data = await galeriAPI.fetchGaleri()
+      setGaleri(data)
     } catch (err) {
       console.error(err)
-      setError("Gagal memuat data stok")
+      setError("Gagal memuat data galeri")
     } finally {
       setLoading(false)
     }
@@ -48,54 +45,51 @@ export default function Stok() {
     setSuccess("")
     try {
       if (editId) {
-        await stokAPI.updateStok(editId, dataForm)
-        setSuccess("Stok berhasil diperbarui")
+        await galeriAPI.updateGaleri(editId, dataForm)
+        setSuccess("Gambar galeri berhasil diperbarui")
       } else {
-        await stokAPI.create(dataForm)
-        setSuccess("Stok berhasil ditambahkan")
+        await galeriAPI.create(dataForm)
+        setSuccess("Gambar galeri berhasil ditambahkan")
       }
-      setDataForm({ namaBahan: "", stok: "", status: "", unit: "" })
+      setDataForm({ gambar: "" })
       setEditId(null)
-      loadStok()
+      loadGaleri()
     } catch (err) {
-      console.error(err)
-      setError("Gagal menyimpan stok")
+      console.error("Error simpan galeri:", err.response?.data || err.message || err)
+      setError("Gagal menyimpan galeri")
     }
   }
 
   const handleEdit = (item) => {
     setEditId(item.id)
     setDataForm({
-      namaBahan: item.namaBahan,
-      stok: item.stok,
-      status: item.status,
-      unit: item.unit,
+      gambar: item.gambar,
     })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleDelete = async (id) => {
-    if (!confirm("Yakin ingin menghapus stok ini?")) return
+    if (!confirm("Yakin ingin menghapus gambar ini?")) return
     try {
-      await stokAPI.deleteStok(id)
-      setSuccess("Stok berhasil dihapus")
-      loadStok()
+      await galeriAPI.deleteGaleri(id)
+      setSuccess("Gambar berhasil dihapus")
+      loadGaleri()
     } catch (err) {
-      console.error(err)
-      setError("Gagal menghapus stok")
+      console.error("Error hapus galeri:", err)
+      setError("Gagal menghapus galeri")
     }
   }
 
-  const columns = ["#", "Nama Bahan", "Stok", "Status", "Unit", "Aksi"]
+  const columns = ["#", "Preview", "Aksi"]
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6">Manajemen Stok</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-6">Manajemen Galeri</h2>
 
       {/* Form Tambah/Edit */}
       <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
         <h3 className="text-lg font-semibold mb-4">
-          {editId ? "Edit Stok" : "Tambah Stok Baru"}
+          {editId ? "Edit Gambar Galeri" : "Tambah Gambar Galeri"}
         </h3>
 
         {success && <AlertBox type="success">{success}</AlertBox>}
@@ -103,40 +97,10 @@ export default function Stok() {
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
-            type="text"
-            name="namaBahan"
-            value={dataForm.namaBahan}
-            placeholder="Nama Bahan"
-            onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
-            required
-          />
-
-          <input
-            type="number"
-            name="stok"
-            value={dataForm.stok}
-            placeholder="Jumlah Stok"
-            onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
-            required
-          />
-
-          <input
-            type="text"
-            name="status"
-            value={dataForm.status}
-            placeholder="Status (Contoh: Aman / Habis)"
-            onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
-            required
-          />
-
-          <input
-            type="text"
-            name="unit"
-            value={dataForm.unit}
-            placeholder="Unit (Contoh: Kg / L)"
+            type="url"
+            name="gambar"
+            value={dataForm.gambar}
+            placeholder="URL Gambar"
             onChange={handleChange}
             className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
             required
@@ -146,30 +110,29 @@ export default function Stok() {
             type="submit"
             className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition"
           >
-            {editId ? "Simpan Perubahan" : "Simpan Stok"}
+            {editId ? "Simpan Perubahan" : "Simpan Gambar"}
           </button>
         </form>
       </div>
 
-      {/* Tabel Daftar Stok */}
+      {/* Tabel Galeri */}
       <div className="bg-white rounded-2xl shadow-lg p-6">
-        <h3 className="text-lg font-semibold mb-4">Daftar Stok</h3>
+        <h3 className="text-lg font-semibold mb-4">Daftar Galeri</h3>
 
         {loading ? (
-          <LoadingSpinner text="Memuat data stok..." />
-        ) : stok.length === 0 ? (
-          <EmptyState text="Belum ada data stok" />
+          <LoadingSpinner text="Memuat galeri..." />
+        ) : galeri.length === 0 ? (
+          <EmptyState text="Belum ada gambar galeri" />
         ) : (
           <GenericTable
             columns={columns}
-            data={stok}
+            data={galeri}
             renderRow={(item, index) => (
               <>
                 <td className="px-6 py-3">{index + 1}</td>
-                <td className="px-6 py-3">{item.namaBahan}</td>
-                <td className="px-6 py-3">{item.stok}</td>
-                <td className="px-6 py-3">{item.status}</td>
-                <td className="px-6 py-3">{item.unit}</td>
+                <td className="px-6 py-3">
+                  <img src={item.gambar} alt={`Galeri ${index + 1}`} className="w-32 h-20 object-cover rounded" />
+                </td>
                 <td className="px-6 py-3 space-x-2">
                   <button
                     className="text-sm text-blue-600 hover:underline"

@@ -1,81 +1,73 @@
-import { AiOutlineArrowUp } from "react-icons/ai"; 
-import { AiOutlineArrowDown } from "react-icons/ai"; 
-import { AiFillFileAdd } from "react-icons/ai"; 
-import { MdRestaurantMenu } from "react-icons/md"; 
-import { MdDeliveryDining } from "react-icons/md"; 
-import { BiStore } from "react-icons/bi"; 
+import { AiOutlineBell } from "react-icons/ai";
+import {
+  AiOutlineArrowUp,
+  AiOutlineArrowDown,
+  AiFillFileAdd,
+} from "react-icons/ai";
+import { MdRestaurantMenu, MdDeliveryDining } from "react-icons/md";
+import { BiStore } from "react-icons/bi";
 import { FaShoppingCart, FaTruck, FaBan, FaDollarSign } from "react-icons/fa";
-import PageHeader from "../components/PageHeader";
-import ListGambar from "../components/ListGambar";
 
+import PageHeader from "../components/PageHeader";
+import ProductTable from "../components/ProductTable";
 
 export default function Dashboard() {
   return (
     <div id="dashboard-container">
-      <PageHeader 
-        title="User Management,  Novia-Admin"
-        breadcrumb={["Admin", "Dashboard"]}
-      >
-        <button className="bg-amber-600 text-white px-3 py-3 rounded flex items-center">Export data <AiOutlineArrowUp className="ml-2" /></button>
-        <button className="bg-green-400 text-white px-3 py-3 rounded flex items-center">Create report <AiOutlineArrowDown className="ml-2"  /></button>
-        {/* <button className="bg-blue-400 text-white px-3 py-1 rounded">Help</button> */}
+      {/* HEADER */}
+      <PageHeader title="Admin Management" breadcrumb={["Admin", "Dashboard"]}>
+        <div className="flex items-center ml-4 space-x-3">
+          <img
+            src="/img/avatar.png"
+            alt="Admin Avatar"
+            className="w-10 h-10 rounded-full object-cover"
+          />
+          <div className="text-left">
+            <div className="text-gray-800 font-manrope-semi-bold text-sm">
+              Novia Zulma
+            </div>
+            <div className="text-gray-400 font-manrope-regular text-xs">
+              Admin
+            </div>
+          </div>
+        </div>
+        <AiOutlineBell className="mr-3 text-2xl" />
       </PageHeader>
 
-      <div id="dashboard-grid" className="p-5 grid sm:grid-cols-2 md:grid-cols-4 gap-4 ">
-        {/* Orders */}
-        {/* <div id="count-orders" className="flex items-center space-x-5 bg-amber-100 rounded-lg shadow-md p-4 max-w-sm w-full hover:bg-amber-500 transition">
-          <div id="orders-icon" className="bg-hijau rounded-full p-4">
-            <BiStore  className="text-amber" />
-          </div>
-          <div id="orders-info" className="flex flex-col  ">
-            <span id="orders-text" className=" font-bold text-amber-900 ">Total Orders</span>
-            <span id="orders-count" className=" text-3xl font-bold text-amber-900">245</span>
-          </div>
-        </div> */}
-
-        {/* Delivered */}
-        {/* <div id="count-delivered" className="flex items-center space-x-5 bg-amber-100 rounded-lg shadow-md p-4 max-w-sm w-full hover:bg-amber-500 transition">
-          <div id="delivered-icon" className="bg-biru rounded-full p-4">
-            <MdDeliveryDining className="text-amber" />
-          </div>
-          <div id="delivered-info" className="flex flex-col">
-            <span id="delivered-text" className=" font-bold text-amber-900">Total Delivered for Today</span>
-            <span id="delivered-count" className="text-amber-900 font-bold text-3xl" > 78</span>
-          </div>
-        </div> */}
-
-        {/* Canceled */}
-        {/* <div id="count-canceled" className="flex items-center space-x-5 bg-amber-100 rounded-lg shadow-md p-4 max-w-sm w-full hover:bg-amber-500 transition">
-          <div id="canceled-icon" className="bg-merah rounded-full p-4">
-           <MdRestaurantMenu  className="text-amber" />
-          </div>
-          <div id="canceled-info" className="flex flex-col">
-            <span id="canceled-text" className=" font-bold text-amber-900">Total Dine In For Today</span>
-            <span id="canceled-count" className="text-3xl font-bold text-amber-900">167 </span>
-          </div>
-        </div> */}
-
-        {/* Revenue */}
-        {/* <div id="count-revenue" className="flex items-center space-x-5 bg-amber-100 rounded-lg shadow-md p-4 max-w-sm w-full hover:bg-amber-500 transition">
-          <div id="revenue-icon" className="bg-kuning rounded-full p-4">
-            <FaDollarSign className="text-amber" />
-          </div>
-          <div id="revenue-info" className="flex flex-col">
-            <span id="revenue-text" className="font-bold text-amber-900">Total Pendapatan </span>
-            <span id="revenue-amount" className="text-3xl font-bold text-amber-900">Rp. 10.987.000,00</span>
-          </div>
-        </div> */}
-      </div>
-      <button className="bg-amber-950 text-white px-7 py-3 rounded-full shadow hover:bg-amber-400 transition ">
-        <center><AiFillFileAdd className="mr-4 text-2xl" /></center> Add Galleries 
-        
-</button>
-
-<ListGambar/>
       
+      <h1 className="mt-5 mb-2 text-gray-800 font-manrope-semi-bold ml-5 text-xl">
+        In the last 30 days
+      </h1>
 
-       
+      {/* DASHBOARD CARD STATISTICS */}
+      <div id="dashboard-grid" className="p-5 flex flex-wrap gap-4">
+        {[
+          { title: "Dine in", value: "30,000" },
+          { title: "Take away", value: "250" },
+          { title: "Delivery", value: "$400,000" },
+        ].map((item, idx) => (
+          <div
+            key={idx}
+            className="relative w-[180px] h-[80px] rounded-md overflow-hidden shadow-md"
+          >
+            <div className="absolute inset-0 flex rotate-[-10deg] scale-125">
+              <div className="w-1/4 bg-[#687057]"></div>
+              <div className="w-1/4 bg-[#8D4E3C]"></div>
+              <div className="w-1/4 bg-[#2E4739]"></div>
+              <div className="w-1/4 bg-[#8A6E3C]"></div>
+            </div>
+            <div className="relative z-10 flex flex-col justify-center h-full px-4 text-white">
+              <span className="text-3xl font-bold">{item.value}</span>
+              <span className="text-sm">{item.title}</span>
+            </div>
+          </div>
+        ))}
       </div>
-   
+
+      {/* PRODUCT TABLE */}
+      <div className="mt-10 px-5">
+        <ProductTable />
+      </div>
+    </div>
   );
 }

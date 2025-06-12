@@ -1,31 +1,29 @@
-import { BiChevronRight } from "react-icons/bi"; 
-import { BiChevronLeft } from "react-icons/bi"; 
-import { CiCoffeeCup } from "react-icons/ci"; 
-import { BiChevronsRight } from "react-icons/bi"; 
-import { BiCoffeeTogo } from "react-icons/bi"; 
-import { FcSettings } from "react-icons/fc"; 
+import { BiChevronRight } from "react-icons/bi";
+import { BiChevronLeft } from "react-icons/bi";
+import { CiCoffeeCup } from "react-icons/ci";
+import { BiChevronsRight } from "react-icons/bi";
+import { BiCoffeeTogo } from "react-icons/bi";
+import { FcSettings } from "react-icons/fc";
 import { CgAdd } from "react-icons/cg";
-import { FaSearch } from "react-icons/fa"; 
+import { FaSearch } from "react-icons/fa";
 
 import ListMenu from "./ListMenu";
 
 export default function Sidebar() {
   return (
-    <div
-      id="sidebar"
-      className="flex min-h-screen w-85 flex-col bg-white p-10 shadow-lg"
-    >
-      
-      <div
-        id="logo-title"
-        className="flex items-center font-bold text-[40px] text-amber-950 mb-6"
-      >
-        <CiCoffeeCup className="mr-2" />
-        Lacof
-        <BiChevronRight className="ml-2" />
-      </div>
+   <div
+  id="sidebar"
+  className="flex min-h-screen w-85 flex-col bg-white p-10 shadow-lg"
+>
+  <div
+    id="logo-title"
+    className="flex items-center font-inter-extrabold font-bold text-[40px] text-amber-950 mb-6"
+  >
+    <img src="img/kopi-removebg-preview.png" alt="Logo" className="w-25 h-25 mr-2" />
+    Lacof
+  </div>
 
-    {/* fitur search */}
+      {/* fitur search */}
       <div id="search" className="flex justify-between items-center p-4">
         <div id="search-bar" className="relative w-50 max-w-lg">
           <input
@@ -41,25 +39,11 @@ export default function Sidebar() {
         </div>
       </div>
 
+      <ListMenu />
+
      
-      <ListMenu/>
 
-    
-      <div
-        id="profile-container"
-        className="flex items-center space-x-2 pl-7 border-t border-gray-200 py-8"
-      >
-        <img
-          id="profile-avatar"
-          src="https://tse3.mm.bing.net/th/id/OIP.y7J8fwy4Na2QI0576FOjOwHaHa?rs=1&pid=ImgDetMain"
-          className="w-12 h-12 rounded-full"
-        />
-        <span id="profile-text">
-          Hai, <b>Novia-Admin</b>
-        </span>
-      </div>
-
-      <div id="sidebar-footer" className="mt-auto">
+      {/* <div id="sidebar-footer" className="mt-auto">
         <div
           id="footer-card"
           className="bg-hijau px-4 py-2 rounded-md shadow-lg mb-10 flex items-center justify-between"
@@ -80,6 +64,21 @@ export default function Sidebar() {
           &copy; 2025 All Right Reserved
         </p>
       </div>
+       */}
+
+       <div className="flex flex-col items-center justify-center text-center space-y-2 text-sm text-gray-500 mt-2">
+  <div id="footer-text" className="text-green-600 text-sm">
+    <span>Semangat terus! Jangan lupa update progres harian 🌱</span>
+  </div>
+  
+  <span id="footer-brand" className="font-semibold text-gray-500">
+    Lacof Coffee Management Portal
+  </span>
+  <p id="footer-copyright" className="font-light text-gray-400">
+    &copy; 2025 Lacof Team - All rights reserved.
+  </p>
+</div>
+
     </div>
   );
 }

@@ -1,49 +1,115 @@
+import { RiArticleLine } from "react-icons/ri"; 
+import { MdOutlineRateReview } from "react-icons/md"; 
+import { SiGooglephotos } from "react-icons/si"; 
+import { TbBrandGooglePhotos } from "react-icons/tb"; 
+import { AiOutlineUserAdd } from "react-icons/ai"; 
+import { BsChatDots } from "react-icons/bs"; 
+import { RiReservedLine } from "react-icons/ri"; 
+import { FaQuestion } from "react-icons/fa"; 
+import { MdArticle } from "react-icons/md"; 
 import { FcFaq } from "react-icons/fc"; 
-import { BsFillChatLeftDotsFill } from "react-icons/bs"; 
 import { AiOutlineTeam } from "react-icons/ai"; 
 import { AiOutlineSound } from "react-icons/ai"; 
 import { FcMoneyTransfer } from "react-icons/fc"; 
-import { GiKnapsack } from "react-icons/gi"; 
 import { MdReviews } from "react-icons/md"; 
-import { TbReportAnalytics } from "react-icons/tb"; 
-import { TbReportMoney } from "react-icons/tb"; 
 import { CgLogOut } from "react-icons/cg"; 
 import { FaChevronRight } from "react-icons/fa"; 
-import { AiOutlineSetting } from "react-icons/ai"; 
-import { MdAccountCircle } from "react-icons/md"; 
-import { MdAccountBox } from "react-icons/md"; 
-import { AiFillFileText } from "react-icons/ai"; 
-import { BsInfoCircleFill } from "react-icons/bs"; 
-import { BsFillChatFill } from "react-icons/bs"; 
-import { FcStackOfPhotos } from "react-icons/fc"; 
+
 import { CiCoffeeCup } from "react-icons/ci"; 
-import { MdFastfood } from "react-icons/md"; 
 import { MdDashboard } from "react-icons/md"; 
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 
 export default function PageHeader() {
-  const menuClass = ({ isActive }) =>
-    `flex cursor-pointer items-center rounded-xl p-4  space-x-2
-    ${isActive ? 
-        "text-hijau bg-orange-200 font-extrabold" : 
-        "text-gray-600 hover:text-hijau hover:bg-orange-200 hover:font-extrabold"
-    }`
+ const menuClass = ({ isActive }) =>
+  `flex cursor-pointer items-center rounded-xl p-4 space-x-2
+  ${isActive ? 
+    "bg-[#B4CD93] text-gray-800 font-extrabold" : 
+    "text-gray-600 hover:text-gray-800 hover:bg-[#B4CD93] hover:font-extrabold"
+  }`;
+
+
     return (
     <div id="sidebar-menu" className="mt-5">
                 <ul id="menu-list" className="space-y-">
                     <li>
                         <NavLink id="menu-1" to="/"
                         className={menuClass}>
-                           <MdDashboard className="mr-2 text-xl" /> Dashboard <FaChevronRight className="ml-30 " /> </NavLink>
+                           <MdDashboard className="mr-2 text-xl" /> Dashboard  </NavLink>
                       </li>
                     <li>
-                        <NavLink id="menu-2" to="/Orders"
+                        <NavLink id="menu-2" to="/Product"
                         className={menuClass}>
-                           <CiCoffeeCup className="mr-2 text-xl"/>Orders <FaChevronRight className="ml-37 " /></NavLink>
+                           <CiCoffeeCup className="mr-2 text-xl"/>Produk</NavLink>
                       </li>
                       <li>
+                        <NavLink id="menu-3" to="/Artikel"
+                        className={menuClass}>
+                          <RiArticleLine  className="mr-2 text-xl"/>Artikel</NavLink>
+                      </li>
+                      <li>
+                        <NavLink id="menu-4" to="/FAQ"
+                        className={menuClass}>  <FaQuestion  className="mr-2 text-xl" />FAQ</NavLink>
+                      </li> 
+                       <li>
+                        <NavLink id="menu-5" to="/Tim"
+                        className={menuClass}>  <AiOutlineTeam className="mr-2 text-xl" />Tim</NavLink>
+                      </li>
+                       <li>
+                        <NavLink id="menu-6" to="/Loker"
+                        className={menuClass}> <AiOutlineSound  className="mr-2 text-xl" />Loker</NavLink>
+                      </li>
+                       <li>
+                        <NavLink id="menu-7" to="/Testimoni"
+                        className={menuClass}><MdOutlineRateReview  className="mr-2 text-xl" />Testimoni</NavLink>
+                      </li>
+                      <li>
+                        <NavLink id="menu-8" to="/Booking"
+                        className={menuClass}> <RiReservedLine className="mr-2 text-xl" />Booking</NavLink>
+                      </li>
+                      <li>
+                        <NavLink id="menu-9" to="/Kontak"
+                        className={menuClass}> <BsChatDots  className="mr-2 text-xl" />Chat</NavLink>
+                        <li>
+                        <NavLink id="menu-10" to="/user"
+                        className={menuClass}> <AiOutlineUserAdd  className="mr-2 text-xl" />Role User</NavLink>
+                      </li>
+                      </li>
+                      <li>
+                        <NavLink id="menu-11" to="/Galeri"
+                        className={menuClass}> <SiGooglephotos  className="mr-2 text-xl" />Galeri</NavLink>
+                      </li>
+                       <li>
+                        <NavLink id="menu-12" to="/Login"
+                        className={menuClass}> <CgLogOut className="mr-2 text-xl" />Logout</NavLink>
+                      </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      {/* <li>
                         <NavLink id="menu-3" to="/Error401"
                         className={menuClass}>  <FcStackOfPhotos className="mr-2 text-xl"/>Error 401 <FaChevronRight className="ml-33 " /></NavLink>
                       </li>
@@ -56,10 +122,7 @@ export default function PageHeader() {
                         className={menuClass}><AiOutlineSetting className="mr-2 text-xl" />Setting <FaChevronRight className="ml-35 " /></NavLink>
                       </li>
                       <div className="border-b py-4" ></div>
-                      <li>
-                        <NavLink id="menu-6" to="/Login"
-                        className={menuClass}> <CgLogOut className="mr-2 text-xl" />Logout</NavLink>
-                      </li>
+                     
                       <li>
                         <NavLink id="menu-7" to="/Report"
                         className={menuClass}><TbReportAnalytics className="mr-2 text-xl" />Report Penjualan</NavLink>
@@ -99,7 +162,7 @@ export default function PageHeader() {
                       <li>
                         <NavLink id="menu-16" to="/FAQ"
                         className={menuClass}>  <FcFaq className="mr-2 text-xl" />FAQ</NavLink>
-                      </li>
+                      </li> */}
                 </ul>
             </div>
             );

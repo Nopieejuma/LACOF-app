@@ -30,8 +30,8 @@ export default function PageHeader() {
 
 
     return (
-    <div id="sidebar-menu" className="mt-5">
-                <ul id="menu-list" className="space-y-">
+    <div id="sidebar-menu" className="mt-2">
+                <ul id="menu-list" className="space">
                     <li>
                         <NavLink id="menu-1" to="/"
                         className={menuClass}>

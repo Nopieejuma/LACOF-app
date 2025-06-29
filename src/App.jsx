@@ -6,13 +6,13 @@ import Loading from "./components/Loading"
 // Lazy-loaded pages
 const Dashboard = lazy(() => import("./pages/Dashboard"))
 const Product = lazy(() => import("./pages/Product"))
-const Customers = lazy(() => import("./pages/Customer"))
-const Orders = lazy(() => import("./pages/Orders"))
+const Customer = lazy(() => import("./pages/Customer"))
+const Orders = lazy(() => import("./pages/OrdersList"))
 const Report = lazy(() => import("./pages/report"))
 const ReportDetail = lazy(() => import("./pages/reportDetail"))
 const Review = lazy(() => import("./pages/review"))
 const ReviewDetail = lazy(() => import("./pages/reviewDetail"))
-const Advice = lazy(() => import("./pages/advice"))
+const Advice = lazy(() => import("./pages/Advice"))
 const AdviceDetail = lazy(() => import("./pages/AdviceDetail"))
 const Quote = lazy(() => import("./pages/Quote"))
 const QuoteDetail = lazy(() => import("./pages/QuoteDetail"))
@@ -20,10 +20,10 @@ const Pengeluaran = lazy(() => import("./pages/pengeluaran"))
 const PengeluaranDetail = lazy(() => import("./pages/pengeluaranDetail"))
 const Loker = lazy(() => import("./pages/loker"))
 const Tim = lazy(() => import("./pages/tim"))
-const Testimoni = lazy(() => import("./pages/Testimoni"))
+const Testimoni = lazy(() => import("./pages/testimoni"))
 const Artikel = lazy(() => import("./pages/Artikel"))
 const Booking = lazy(() => import("./pages/Booking"))
-const User = lazy(() => import("./pages/User"))
+const User = lazy(() => import("./pages/user"))
 const Galeri = lazy(() => import("./pages/Galeri"))
 const Kontak = lazy(() => import("./pages/Kontak"))
 const FAQ = lazy(() => import("./pages/FAQ"))
@@ -43,8 +43,8 @@ export default function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Dashboard />} />
-          <Route path="customers" element={<Customers />} />
           <Route path="product" element={<Product />} />
+          <Route path="customers" element={<Customer />} />
           <Route path="orders" element={<Orders />} />
           <Route path="report" element={<Report />} />
           <Route path="report/:filter/:index" element={<ReportDetail />} />

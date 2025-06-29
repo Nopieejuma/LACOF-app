@@ -1,6 +1,7 @@
 import React from "react";
 // import Advice from "../components/Advice";
-import Advice from "./advice";
+import Advice from "./Advice"
+
 
 export default function AdviceDetail() {
   return (

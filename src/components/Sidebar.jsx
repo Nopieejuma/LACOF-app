@@ -40,6 +40,17 @@ export default function Sidebar() {
       </div>
 
       <ListMenu />
+      <div className="mt-6 px-4">
+  <button
+    onClick={() => {
+      localStorage.clear(); // bersihkan sesi login jika ada
+      window.location.href = "https://project-lacof-app-guest.vercel.app/"; // ganti dengan link dashboard teman
+    }}
+    className="w-full bg-gray-100 hover:bg-gray-200 text-red-600 font-medium py-2 px-4 rounded-lg transition duration-200"
+  >
+    ⎋ Logout
+  </button>
+</div>
 
        <div className="flex flex-col items-center justify-center text-center space-y-2 text-sm text-gray-500 mt-2">
   <div id="footer-text" className="text-green-600 text-sm">

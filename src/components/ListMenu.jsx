@@ -79,10 +79,10 @@ export default function PageHeader() {
                         <NavLink id="menu-11" to="/Galeri"
                         className={menuClass}> <SiGooglephotos  className="mr-2 text-xl" />Galeri</NavLink>
                       </li>
-                       <li>
+                       {/* <li>
                         <NavLink id="menu-12" to="/Login"
                         className={menuClass}> <CgLogOut className="mr-2 text-xl" />Logout</NavLink>
-                      </li>
+                      </li> */}
 
 
 

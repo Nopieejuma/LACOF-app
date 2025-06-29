@@ -15,6 +15,7 @@ export default function Testimoni() {
   const [dataForm, setDataForm] = useState({
     nama: "",
     pesan: "",
+    profesi: "",
   })
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function Testimoni() {
         await testimoniAPI.create(dataForm)
         setSuccess("Testimoni berhasil ditambahkan")
       }
-      setDataForm({ nama: "", pesan: "" })
+      setDataForm({ nama: "", pesan: "", profesi: "" })
       setEditId(null)
       loadTestimoni()
     } catch (err) {
@@ -66,6 +67,7 @@ export default function Testimoni() {
     setDataForm({
       nama: item.nama,
       pesan: item.pesan,
+      profesi: item.profesi || "",
     })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -82,7 +84,7 @@ export default function Testimoni() {
     }
   }
 
-  const columns = ["#", "Nama", "Pesan", "Aksi"]
+  const columns = ["#", "Nama", "Pesan","Profesi", "Aksi"]
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -105,6 +107,16 @@ export default function Testimoni() {
             placeholder="Nama"
             onChange={handleChange}
             className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+            required
+          />
+
+          <textarea
+            name="profesi"
+            value={dataForm.profesi}
+            placeholder="Profesi anda"
+            onChange={handleChange}
+            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+            rows={4}
             required
           />
 
@@ -143,6 +155,7 @@ export default function Testimoni() {
               <>
                 <td className="px-6 py-3">{index + 1}</td>
                 <td className="px-6 py-3">{item.nama}</td>
+                <td className="px-6 py-3">{item.profesi}</td>
                 <td className="px-6 py-3">{item.pesan}</td>
                 <td className="px-6 py-3 space-x-2">
                   <button

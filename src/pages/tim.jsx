@@ -15,6 +15,7 @@ export default function Tim() {
   const [dataForm, setDataForm] = useState({
     nama: "",
     jabatan: "",
+    gambar: "", // Pastikan state gambar di-reset
   })
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function Tim() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true) // Set loading saat submit
     setError("")
     setSuccess("")
     try {
@@ -52,12 +54,15 @@ export default function Tim() {
         await timAPI.create(dataForm)
         setSuccess("Data tim berhasil ditambahkan")
       }
-      setDataForm({ nama: "", jabatan: "" })
+      // Reset form setelah berhasil
+      setDataForm({ nama: "", jabatan: "", gambar: "" })
       setEditId(null)
-      loadTim()
+      await loadTim() // Muat ulang data
     } catch (err) {
       console.error(err)
       setError("Gagal menyimpan data tim")
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -66,23 +71,28 @@ export default function Tim() {
     setDataForm({
       nama: item.nama,
       jabatan: item.jabatan,
+      gambar: item.gambar,
     })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleDelete = async (id) => {
-    if (!confirm("Yakin ingin menghapus data tim ini?")) return
+    if (!window.confirm("Yakin ingin menghapus data tim ini?")) return
     try {
+      setLoading(true)
       await timAPI.deleteTim(id)
       setSuccess("Data tim berhasil dihapus")
-      loadTim()
+      await loadTim()
     } catch (err) {
       console.error(err)
       setError("Gagal menghapus data tim")
+    } finally {
+      setLoading(false)
     }
   }
 
-  const columns = ["#", "Nama", "Jabatan", "Aksi"]
+  // Tambahkan "Foto" ke dalam kolom
+  const columns = ["#", "Nama", "Jabatan", "Foto", "Aksi"]
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -94,8 +104,8 @@ export default function Tim() {
           {editId ? "Edit Data Tim" : "Tambah Data Tim Baru"}
         </h3>
 
-        {success && <AlertBox type="success">{success}</AlertBox>}
-        {error && <AlertBox type="error">{error}</AlertBox>}
+        {success && <AlertBox type="success" onClose={() => setSuccess("")}>{success}</AlertBox>}
+        {error && <AlertBox type="error" onClose={() => setError("")}>{error}</AlertBox>}
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
@@ -104,7 +114,7 @@ export default function Tim() {
             value={dataForm.nama}
             placeholder="Nama"
             onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
             required
           />
 
@@ -114,26 +124,37 @@ export default function Tim() {
             value={dataForm.jabatan}
             placeholder="Jabatan"
             onChange={handleChange}
-            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
+            required
+          />
+
+         <input
+            type="url" // Ganti type menjadi 'url' untuk validasi dasar
+            name="gambar"
+            value={dataForm.gambar}
+            placeholder="URL Gambar (contoh: https://...)"
+            onChange={handleChange}
+            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
             required
           />
 
           <button
             type="submit"
-            className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition"
+            disabled={loading} // Disable tombol saat loading
+            className="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700 transition disabled:bg-emerald-300"
           >
-            {editId ? "Simpan Perubahan" : "Simpan Data Tim"}
+            {loading ? (editId ? "Menyimpan..." : "Menambahkan...") : (editId ? "Simpan Perubahan" : "Simpan Data Tim")}
           </button>
         </form>
       </div>
 
       {/* Tabel Daftar Tim */}
-      <div className="bg-white rounded-2xl shadow-lg p-6">
+      <div className="bg-white rounded-2xl shadow-lg p-6 overflow-x-auto">
         <h3 className="text-lg font-semibold mb-4">Daftar Tim</h3>
 
-        {loading ? (
+        {loading && tim.length === 0 ? (
           <LoadingSpinner text="Memuat data tim..." />
-        ) : tim.length === 0 ? (
+        ) : tim.length === 0 && !error ? (
           <EmptyState text="Belum ada data tim" />
         ) : (
           <GenericTable
@@ -141,10 +162,25 @@ export default function Tim() {
             data={tim}
             renderRow={(item, index) => (
               <>
-                <td className="px-6 py-3">{index + 1}</td>
-                <td className="px-6 py-3">{item.nama}</td>
-                <td className="px-6 py-3">{item.jabatan}</td>
-                <td className="px-6 py-3 space-x-2">
+                <td className="px-6 py-4 whitespace-nowrap align-middle">{index + 1}</td>
+                <td className="px-6 py-4 whitespace-nowrap align-middle font-medium text-gray-900">{item.nama}</td>
+                <td className="px-6 py-4 whitespace-nowrap align-middle text-gray-600">{item.jabatan}</td>
+                <td className="px-6 py-4">
+                  {item.gambar ? (
+                    <img 
+                      src={item.gambar} 
+                      alt={`Foto ${item.nama}`} 
+                      className="w-16 h-16 object-cover rounded-md"
+                      // Tambahan: handle jika gambar error
+                      onError={(e) => { e.target.onerror = null; e.target.src="https://via.placeholder.com/150?text=Error"; }}
+                    />
+                  ) : (
+                    <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center text-xs text-gray-500">
+                      No Img
+                    </div>
+                  )}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap align-middle space-x-4">
                   <button
                     className="text-sm text-blue-600 hover:underline"
                     onClick={() => handleEdit(item)}

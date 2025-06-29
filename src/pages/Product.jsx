@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { productAPI } from "../services/productAPI" // pastikan ada API service product
+import { productAPI } from "../services/productAPI"
 import GenericTable from "../components/GenericTable"
 import AlertBox from "../components/AlertBox"
 import EmptyState from "../components/EmptyState"
@@ -17,6 +17,7 @@ export default function Product() {
     deskripsi: "",
     harga: "",
     rating: "",
+    img: "",
   })
 
   useEffect(() => {
@@ -46,27 +47,37 @@ export default function Product() {
     e.preventDefault()
     setError("")
     setSuccess("")
+
+    const hargaFix = parseInt(dataForm.harga.replace(/\./g, ""))
+    const ratingFix = parseInt(dataForm.rating)
+
+    if (isNaN(hargaFix) || isNaN(ratingFix)) {
+      setError("Harga dan rating harus berupa angka yang valid.")
+      return
+    }
+
     try {
       if (editId) {
         await productAPI.updateProduk(editId, {
           ...dataForm,
-          harga: parseInt(dataForm.harga),
-          rating: parseInt(dataForm.rating),
+          harga: hargaFix,
+          rating: ratingFix,
         })
         setSuccess("Produk berhasil diperbarui")
       } else {
         await productAPI.create({
           ...dataForm,
-          harga: parseInt(dataForm.harga),
-          rating: parseInt(dataForm.rating),
+          harga: hargaFix,
+          rating: ratingFix,
         })
         setSuccess("Produk berhasil ditambahkan")
       }
-      setDataForm({ nama: "", deskripsi: "", harga: "", rating: "" })
+
+      setDataForm({ nama: "", deskripsi: "", harga: "", rating: "", img: "" })
       setEditId(null)
       loadProduk()
     } catch (err) {
-      console.error("Error simpan produk:", err.response?.data || err.message || err)
+      console.error("Gagal simpan:", err.response?.data || err.message || err)
       setError("Gagal menyimpan produk")
     }
   }
@@ -78,6 +89,7 @@ export default function Product() {
       deskripsi: item.deskripsi,
       harga: item.harga.toString(),
       rating: item.rating.toString(),
+      img: item.img,
     })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -94,11 +106,13 @@ export default function Product() {
     }
   }
 
-  const columns = ["#", "Nama", "Deskripsi", "Harga", "Rating", "Aksi"]
+  const columns = ["#", "Nama", "Deskripsi", "Harga", "Rating", "Gambar", "Aksi"]
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6">Manajemen Produk</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-6">
+        Manajemen Produk
+      </h2>
 
       {/* Form Tambah/Edit */}
       <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
@@ -131,10 +145,10 @@ export default function Product() {
           />
 
           <input
-            type="number"
+            type="text"
             name="harga"
             value={dataForm.harga}
-            placeholder="Harga (Rp)"
+            placeholder="Harga (contoh: 35000 atau 35.000)"
             onChange={handleChange}
             className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
             required
@@ -147,6 +161,16 @@ export default function Product() {
             placeholder="Rating (1-5)"
             onChange={handleChange}
             className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+            required
+          />
+
+          <input
+            type="url"
+            name="img"
+            value={dataForm.img}
+            placeholder="URL Gambar (contoh: https://...)"
+            onChange={handleChange}
+            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"
             required
           />
 
@@ -176,8 +200,21 @@ export default function Product() {
                 <td className="px-6 py-3">{index + 1}</td>
                 <td className="px-6 py-3">{item.nama}</td>
                 <td className="px-6 py-3">{item.deskripsi}</td>
-                <td className="px-6 py-3">Rp {item.harga.toLocaleString()}</td>
+                <td className="px-6 py-3">
+                  Rp {parseInt(item.harga).toLocaleString("id-ID")}
+                </td>
                 <td className="px-6 py-3">{item.rating}</td>
+                <td className="px-6 py-3">
+                  {item.img ? (
+                    <img
+                      src={item.img}
+                      alt={item.nama}
+                      className="w-20 h-20 object-cover rounded-lg shadow"
+                    />
+                  ) : (
+                    <span className="text-gray-400 italic">No Image</span>
+                  )}
+                </td>
                 <td className="px-6 py-3 space-x-2">
                   <button
                     className="text-sm text-blue-600 hover:underline"

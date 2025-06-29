@@ -16,6 +16,7 @@ export default function Artikel() {
     judul: "",
     isi: "",
     gambar: "",
+    category:"",
   })
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function Artikel() {
         await artikelAPI.create(dataForm)
         setSuccess("Artikel berhasil ditambahkan")
       }
-      setDataForm({ judul: "", isi: "", gambar: "" })
+      setDataForm({ judul: "", isi: "", gambar: "", category:"" })
       setEditId(null)
       loadArtikel()
     } catch (err) {
@@ -68,6 +69,7 @@ export default function Artikel() {
       judul: item.judul,
       isi: item.isi,
       gambar: item.gambar,
+      category: item.category,
     })
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -84,7 +86,7 @@ export default function Artikel() {
     }
   }
 
-  const columns = ["#", "Judul", "Gambar", "Aksi"]
+  const columns = ["#", "Judul","Kategori", "Gambar", "Aksi"]
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -105,6 +107,16 @@ export default function Artikel() {
             name="judul"
             value={dataForm.judul}
             placeholder="Judul Artikel"
+            onChange={handleChange}
+            className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+            required
+          />
+
+           <input
+            type="text"
+            name="category"
+            value={dataForm.category}
+            placeholder="Kategori Artikel"
             onChange={handleChange}
             className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
             required
@@ -155,6 +167,8 @@ export default function Artikel() {
               <>
                 <td className="px-6 py-3">{index + 1}</td>
                 <td className="px-6 py-3">{item.judul}</td>
+                <td className="px-6 py-3">{item.category}</td>
+                <td className="px-6 py-3">{item.isi}</td>
                 <td className="px-6 py-3">
                   <img src={item.gambar} alt={item.judul} className="w-20 h-14 object-cover rounded" />
                 </td>
